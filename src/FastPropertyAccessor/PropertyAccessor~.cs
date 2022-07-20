@@ -73,8 +73,8 @@ internal class PropertyAccessor<TTarget, TProperty> : PropertyAccessor
         }
     }
 
-    private Func<TTarget, TProperty?>? _getter;
-    private Action<TTarget, TProperty>? _setter;
+    private readonly Func<TTarget, TProperty?>? _getter;
+    private readonly Action<TTarget, TProperty>? _setter;
 
     public override object? GetValue(object target)
     {
@@ -91,8 +91,8 @@ internal class PropertyAccessor<TTarget, TProperty> : PropertyAccessor
     }
 
     #region byte
-    private Func<TTarget, byte>? _getterByte;
-    private Action<TTarget, byte>? _setterByte;
+    private readonly Func<TTarget, byte>? _getterByte;
+    private readonly Action<TTarget, byte>? _setterByte;
 
     public override byte GetByteValue(object target)
     {
@@ -110,8 +110,8 @@ internal class PropertyAccessor<TTarget, TProperty> : PropertyAccessor
     #endregion
 
     #region bool
-    private Func<TTarget, bool>? _getterBool;
-    private Action<TTarget, bool>? _setterBool;
+    private readonly Func<TTarget, bool>? _getterBool;
+    private readonly Action<TTarget, bool>? _setterBool;
 
     public override bool GetBoolValue(object target)
     {
@@ -129,8 +129,8 @@ internal class PropertyAccessor<TTarget, TProperty> : PropertyAccessor
     #endregion
 
     #region Int16
-    private Func<TTarget, short>? _getterInt16;
-    private Action<TTarget, short>? _setterInt16;
+    private readonly Func<TTarget, short>? _getterInt16;
+    private readonly Action<TTarget, short>? _setterInt16;
 
     public override long GetInt16Value(object target)
     {
@@ -148,8 +148,8 @@ internal class PropertyAccessor<TTarget, TProperty> : PropertyAccessor
     #endregion
 
     #region Int32
-    private Func<TTarget, int>? _getterInt32;
-    private Action<TTarget, int>? _setterInt32;
+    private readonly Func<TTarget, int>? _getterInt32;
+    private readonly Action<TTarget, int>? _setterInt32;
 
     public override int GetInt32Value(object target)
     {
@@ -167,8 +167,8 @@ internal class PropertyAccessor<TTarget, TProperty> : PropertyAccessor
     #endregion
 
     #region Int64
-    private Func<TTarget, long>? _getterInt64;
-    private Action<TTarget, long>? _setterInt64;
+    private readonly Func<TTarget, long>? _getterInt64;
+    private readonly Action<TTarget, long>? _setterInt64;
 
     public override long GetInt64Value(object target)
     {
@@ -186,8 +186,8 @@ internal class PropertyAccessor<TTarget, TProperty> : PropertyAccessor
     #endregion
 
     #region DateTime
-    private Func<TTarget, DateTime>? _getterDateTime;
-    private Action<TTarget, DateTime>? _setterDateTime;
+    private readonly Func<TTarget, DateTime>? _getterDateTime;
+    private readonly Action<TTarget, DateTime>? _setterDateTime;
 
     public override DateTime GetDateTimeValue(object target)
     {

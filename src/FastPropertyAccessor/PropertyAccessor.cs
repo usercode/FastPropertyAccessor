@@ -14,13 +14,9 @@ public abstract class PropertyAccessor
     /// </summary>
     /// <param name="propertyInfo"></param>
     /// <returns></returns>
-    public static PropertyAccessor Get(PropertyInfo? propertyInfo)
+    public static PropertyAccessor Get(PropertyInfo propertyInfo)
     {
-        ArgumentNullException.ThrowIfNull(propertyInfo);
-
-        PropertyAccessor? accessor;
-
-        if (!_cache.TryGetValue(propertyInfo, out accessor))
+        if (_cache.TryGetValue(propertyInfo, out PropertyAccessor? accessor) == false)
         {
             accessor = (PropertyAccessor?)Activator.CreateInstance(typeof(PropertyAccessor<,>)
                             .MakeGenericType(propertyInfo.ReflectedType!, propertyInfo.PropertyType),
@@ -51,12 +47,12 @@ public abstract class PropertyAccessor
     /// <summary>
     /// PropertyInfo
     /// </summary>
-    public PropertyInfo PropertyInfo { get; private set; }
+    public PropertyInfo PropertyInfo { get; }
 
     /// <summary>
     /// Name
     /// </summary>
-    public string Name { get; private set; }
+    public string Name { get; }
 
     /// <summary>
     /// CanRead
