@@ -23,4 +23,9 @@ accessor.SetValue(model, 200);
 int amount2 = accessor.GetInt32Value(model);
 
 accessor.SetInt32Value(model, 200);
+
+//use TypeAccessor
+TypeAccessor typeAccessor = TypeAccessor.Get(model.GetType());
+
+typeAccessor[model, "Amount"] = 100;
 ```
