@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Collections.Concurrent;
+using System.Reflection;
 
 namespace FastPropertyAccessor;
 
@@ -7,7 +8,7 @@ namespace FastPropertyAccessor;
 /// </summary>
 public abstract class PropertyAccessor
 {
-    private static readonly Dictionary<PropertyInfo, PropertyAccessor> _cache = new();
+    private static readonly ConcurrentDictionary<PropertyInfo, PropertyAccessor> _cache = new();
 
     /// <summary>
     /// Get
@@ -16,26 +17,14 @@ public abstract class PropertyAccessor
     /// <returns></returns>
     public static PropertyAccessor Get(PropertyInfo propertyInfo)
     {
-        if (_cache.TryGetValue(propertyInfo, out PropertyAccessor? accessor) == false)
+        return _cache.GetOrAdd(propertyInfo, static key =>
         {
-            accessor = (PropertyAccessor?)Activator.CreateInstance(typeof(PropertyAccessor<,>)
-                            .MakeGenericType(propertyInfo.ReflectedType!, propertyInfo.PropertyType),
-                            propertyInfo) ?? throw new Exception("Couldn't create property accessor!");
+            PropertyAccessor accessor = (PropertyAccessor?)Activator.CreateInstance(typeof(PropertyAccessor<,>)
+                            .MakeGenericType(key.ReflectedType!, key.PropertyType),
+                            key) ?? throw new Exception("Couldn't create property accessor!");
 
-            _cache.Add(propertyInfo, accessor);
-        }
-
-        return accessor;
-    }
-
-    /// <summary>
-    /// GetAll
-    /// </summary>
-    /// <param name="type"></param>
-    /// <returns></returns>
-    public static IEnumerable<PropertyAccessor> GetAll(Type type)
-    {
-        return type.GetProperties().Select(x => Get(x)).ToList();
+            return accessor;
+        });
     }
 
     public PropertyAccessor(PropertyInfo propertyInfo)
