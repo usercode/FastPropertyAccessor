@@ -9,22 +9,22 @@ using System.Threading.Tasks;
 namespace FastPropertyAccessor;
 
 /// <summary>
-/// ObjectAccessor
+/// TypeAccessor
 /// </summary>
-public class ObjectAccessor
+public class TypeAccessor
 {
-    private static ConcurrentDictionary<Type, ObjectAccessor> _cache = new();
+    private static readonly ConcurrentDictionary<Type, TypeAccessor> _cache = new();
 
     /// <summary>
     /// Get
     /// </summary>
     /// <param name="type"></param>
     /// <returns></returns>
-    public static ObjectAccessor Get(Type type)
+    public static TypeAccessor Get(Type type)
     {
         return _cache.GetOrAdd(type, static key =>
         {
-            ObjectAccessor objectAccessor = new ObjectAccessor();
+            TypeAccessor objectAccessor = new TypeAccessor();
 
             foreach (PropertyInfo pi in key.GetProperties(BindingFlags.Public | BindingFlags.Instance))
             {
@@ -35,7 +35,7 @@ public class ObjectAccessor
         });
     }
     
-    private Dictionary<string, PropertyAccessor> _properties = new();
+    private readonly Dictionary<string, PropertyAccessor> _properties = new();
 
     /// <summary>
     /// GetProperty

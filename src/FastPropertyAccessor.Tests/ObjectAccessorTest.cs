@@ -19,7 +19,7 @@ public class ObjectAccessorTest
         model.ValueInt64 = 200;
         model.Date = DateTime.MaxValue;
 
-        ObjectAccessor accessor = ObjectAccessor.Get(model.GetType());
+        TypeAccessor accessor = TypeAccessor.Get(model.GetType());
 
         Assert.Equal("John Doe", accessor[model, nameof(Model.Name)]);
         Assert.True((bool)accessor[model, nameof(Model.IsActive)]);
@@ -36,7 +36,7 @@ public class ObjectAccessorTest
         model.ValueInt64 = 200;
         model.Date = DateTime.MaxValue;
 
-        ObjectAccessor accessor = ObjectAccessor.Get(model.GetType());
+        TypeAccessor accessor = TypeAccessor.Get(model.GetType());
 
         accessor[model, nameof(Model.Name)] = "John Doe 2";
         accessor[model, nameof(Model.IsActive)] = false;
