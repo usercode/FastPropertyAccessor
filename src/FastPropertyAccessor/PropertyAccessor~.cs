@@ -33,6 +33,14 @@ internal class PropertyAccessor<TTarget, TProperty> : PropertyAccessor
             {
                 _getterInt64 = getMethod.CreateDelegate<Func<TTarget, long>>();
             }
+            else if (typeof(TProperty) == typeof(float))
+            {
+                _getterFloat = getMethod.CreateDelegate<Func<TTarget, float>>();
+            }
+            else if (typeof(TProperty) == typeof(double))
+            {
+                _getterDouble = getMethod.CreateDelegate<Func<TTarget, double>>();
+            }
             else if (typeof(TProperty) == typeof(DateTime))
             {
                 _getterDateTime = getMethod.CreateDelegate<Func<TTarget, DateTime>>();
@@ -44,7 +52,7 @@ internal class PropertyAccessor<TTarget, TProperty> : PropertyAccessor
             CanWrite = true;
 
             _setter = setMethod.CreateDelegate<Action<TTarget, TProperty>>();
-            
+
             if (typeof(TProperty) == typeof(byte))
             {
                 _setterByte = setMethod.CreateDelegate<Action<TTarget, byte>>();
@@ -65,6 +73,14 @@ internal class PropertyAccessor<TTarget, TProperty> : PropertyAccessor
             else if (typeof(TProperty) == typeof(long))
             {
                 _setterInt64 = setMethod.CreateDelegate<Action<TTarget, long>>();
+            }
+            else if (typeof(TProperty) == typeof(float))
+            {
+                _setterFloat = setMethod.CreateDelegate<Action<TTarget, float>>();
+            }
+            else if (typeof(TProperty) == typeof(double))
+            {
+                _setterDouble = setMethod.CreateDelegate<Action<TTarget, double>>();
             }
             else if (typeof(TProperty) == typeof(DateTime))
             {
@@ -182,6 +198,44 @@ internal class PropertyAccessor<TTarget, TProperty> : PropertyAccessor
         ArgumentNullException.ThrowIfNull(_setterInt64);
 
         _setterInt64((TTarget)target, value);
+    }
+    #endregion
+
+    #region float
+    private readonly Func<TTarget, float>? _getterFloat;
+    private readonly Action<TTarget, float>? _setterFloat;
+
+    public override float GetFloatValue(object target)
+    {
+        ArgumentNullException.ThrowIfNull(_getterFloat);
+
+        return _getterFloat((TTarget)target);
+    }
+
+    public override void SetFloatValue(object target, float value)
+    {
+        ArgumentNullException.ThrowIfNull(_setterFloat);
+
+        _setterFloat((TTarget)target, value);
+    }
+    #endregion
+
+    #region double
+    private readonly Func<TTarget, double>? _getterDouble;
+    private readonly Action<TTarget, double>? _setterDouble;
+
+    public override double GetDoubleValue(object target)
+    {
+        ArgumentNullException.ThrowIfNull(_getterDouble);
+
+        return _getterDouble((TTarget)target);
+    }
+
+    public override void SetDoubleValue(object target, double value)
+    {
+        ArgumentNullException.ThrowIfNull(_setterDouble);
+
+        _setterDouble((TTarget)target, value);
     }
     #endregion
 

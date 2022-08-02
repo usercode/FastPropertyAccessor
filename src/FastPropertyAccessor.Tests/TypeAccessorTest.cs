@@ -7,7 +7,7 @@ using Xunit;
 
 namespace FastPropertyAccessor.Tests;
 
-public class ObjectAccessorTest
+public class TypeAccessorTest
 {
     [Fact]
     public void Get()
@@ -45,5 +45,27 @@ public class ObjectAccessorTest
         Assert.Equal("John Doe 2", model.Name);
         Assert.False(model.IsActive);
         Assert.Equal(999, model.Value);
+    }
+
+    [Fact]
+    public void EnumerableProperties()
+    {
+        Model model = new Model();
+        model.Name = "John Doe";
+        model.IsActive = true;
+        model.Value = 101;
+        model.ValueInt64 = 200;
+        model.Date = DateTime.MaxValue;
+
+        TypeAccessor accessor = TypeAccessor.Get(model.GetType());
+
+        int counter = 0;
+
+        foreach (PropertyAccessor property in accessor)
+        {
+            counter++;
+        }
+
+        Assert.Equal(5, counter);
     }
 }

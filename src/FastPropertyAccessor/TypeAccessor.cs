@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace FastPropertyAccessor;
 /// <summary>
 /// TypeAccessor
 /// </summary>
-public class TypeAccessor
+public class TypeAccessor : IEnumerable<PropertyAccessor>
 {
     private static readonly ConcurrentDictionary<Type, TypeAccessor> _cache = new();
 
@@ -51,6 +52,16 @@ public class TypeAccessor
         }
 
         return propertyAccessor;
+    }
+
+    public IEnumerator<PropertyAccessor> GetEnumerator()
+    {
+        return _properties.Values.GetEnumerator();
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return GetEnumerator();
     }
 
     /// <summary>

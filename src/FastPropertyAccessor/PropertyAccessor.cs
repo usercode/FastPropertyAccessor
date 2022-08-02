@@ -138,6 +138,34 @@ public abstract class PropertyAccessor
     public abstract void SetInt64Value(object target, long value);
 
     /// <summary>
+    /// GetFloatValue
+    /// </summary>
+    /// <param name="target"></param>
+    /// <returns></returns>
+    public abstract float GetFloatValue(object target);
+
+    /// <summary>
+    /// SetFloatValue
+    /// </summary>
+    /// <param name="target"></param>
+    /// <param name="value"></param>
+    public abstract void SetFloatValue(object target, float value);
+
+    /// <summary>
+    /// GetDoubleValue
+    /// </summary>
+    /// <param name="target"></param>
+    /// <returns></returns>
+    public abstract double GetDoubleValue(object target);
+
+    /// <summary>
+    /// SetDoubleValue
+    /// </summary>
+    /// <param name="target"></param>
+    /// <param name="value"></param>
+    public abstract void SetDoubleValue(object target, double value);
+
+    /// <summary>
     /// GetDateTimeValue
     /// </summary>
     /// <param name="target"></param>
