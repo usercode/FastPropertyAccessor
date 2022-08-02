@@ -28,4 +28,10 @@ accessor.SetInt32Value(model, 200);
 TypeAccessor typeAccessor = TypeAccessor.Get(model.GetType());
 
 typeAccessor[model, "Amount"] = 100;
+
+//enumerate properties
+foreach(PropertyAccessor property in typeAccessor)
+{
+   //access to property
+}
 ```
