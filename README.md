@@ -38,6 +38,7 @@ foreach(PropertyAccessor property in typeAccessor)
 
 ## Benchmark
 
-<img width="607" alt="benchmark" src="https://user-images.githubusercontent.com/2958488/189219379-47b7e3e7-9b21-4508-b211-9e23e3aa9411.png">
+<img width="647" alt="benchmark" src="https://user-images.githubusercontent.com/2958488/189353223-0ecca2a4-f069-4eef-ae0c-18cf0610d577.png">
+
 
 
